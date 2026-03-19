@@ -154,4 +154,4 @@ Essa validação evita inconsistências no sistema e garante que todos os discos
 
 ## Autora:
 
-Projeto desenvolvido por Sofia Medeiros da Fonseca para fins de estudo com Node.js e Express.
+Projeto desenvolvido por Sofia Medeiros da Fonseca para fins de estudo em API´s, Node.js e Express.
