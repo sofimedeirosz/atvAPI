@@ -16,14 +16,17 @@ const discos = [
 
 //endpoint
 
+//hello world
 app.get('/', (req, res) => {
     res.send('Hello World!');
 })
 
+//listar todos os discos
 app.get('/discos', (req, res) => {
     res.json(discos);
 })
 
+//adicionar um novo disco com validação de campos obrigatórios
 app.post('/discos', (req, res) => {
     if (!req.body.artista || !req.body.titulo) {
         return res.status(400).json({ error: "Artista e título são obrigatórios" });
@@ -36,6 +39,32 @@ app.post('/discos', (req, res) => {
     discos.push(novoDisco);
     res.status(201).json(novoDisco);
 })
+
+//deletar um disco por id com tratamento de erro para id não encontrado
+app.delete('/discos/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const index = discos.findIndex(disco => disco.id === id);
+    if (index === -1) {
+        return res.status(404).json({ error: "Disco não encontrado" });
+    }
+    discos.splice(index, 1);
+    res.status(200).json({ message: "Disco removido com sucesso" });
+});
+
+//atualizar um disco por id com validação de campos obrigatórios e tratamento de erro para id não encontrado
+app.put('/discos/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const index = discos.findIndex(disco => disco.id === id); 
+    if (index === -1) {
+        return res.status(404).json({ error: "Disco não encontrado" });
+    } 
+    if (!req.body.artista || !req.body.titulo) {
+        return res.status(400).json({ error: "Artista e título são obrigatórios" });
+    }
+    discos[index].artista = req.body.artista;
+    discos[index].titulo = req.body.titulo;
+    res.status(200).json(discos[index]);
+});
 
 app.listen(port, () => {
     console.log("Servidor rodando!")
