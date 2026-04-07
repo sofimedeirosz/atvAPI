@@ -120,9 +120,84 @@ http://localhost:3000
 
 ---
 
-## Validações Implementadas:
+### * PUT /discos/:id
 
-A API possui validação básica no endpoint de criação de discos:
+* **Descrição:** Atualiza um disco existente pelo ID
+* **URL:** `/discos/:id`
+* **Método:** PUT
+* **Body:** JSON obrigatório
+
+#### Exemplo de requisição:
+
+```json
+{
+  "artista": "Nirvana",
+  "titulo": "Nevermind"
+}
+```
+
+#### Resposta (200 OK):
+
+```json
+{
+  "id": 1,
+  "artista": "Nirvana",
+  "titulo": "Nevermind"
+}
+```
+
+#### Resposta de erro (400 Bad Request):
+
+```json
+{
+  "error": "Artista e título são obrigatórios"
+}
+```
+
+#### Resposta de erro (404 Not Found):
+
+```json
+{
+  "error": "Disco não encontrado"
+}
+```
+
+---
+
+### * DELETE /discos/:id
+
+* **Descrição:** Remove um disco pelo ID
+* **URL:** `/discos/:id`
+* **Método:** DELETE
+* **Body:** Não possui
+
+#### Exemplo de requisição:
+
+```
+DELETE /discos/1
+```
+
+#### Resposta (200 OK):
+
+```json
+{
+  "message": "Disco removido com sucesso"
+}
+```
+
+#### Resposta de erro (404 Not Found):
+
+```json
+{
+  "error": "Disco não encontrado"
+}
+```
+
+---
+
+## Validações Implementadas
+
+A API possui validações nos endpoints de criação e atualização:
 
 ```js
 if (!req.body.artista || !req.body.titulo) {
@@ -130,20 +205,20 @@ if (!req.body.artista || !req.body.titulo) {
 }
 ```
 
-### que essa validação faz:
+### O que essas validações fazem:
 
 * Garante que o campo **artista** seja enviado
 * Garante que o campo **titulo** seja enviado
-* Impede inserção de dados incompletos
+* Impede inserção ou atualização com dados incompletos
 * Retorna erro **400 Bad Request** caso falhe
 
-### Importância:
+### Tratamento adicional:
 
-Essa validação evita inconsistências no sistema e garante que todos os discos cadastrados tenham as informações mínimas necessárias.
+* Retorna **404 Not Found** quando o ID não existe (PUT e DELETE)
 
 ---
 
-## Observações:
+## Observações
 
 * Os dados são armazenados em memória (array), ou seja:
 
@@ -152,6 +227,6 @@ Essa validação evita inconsistências no sistema e garante que todos os discos
 
 ---
 
-## Autora:
+## Autora
 
-Projeto desenvolvido por Sofia Medeiros da Fonseca para fins de estudo em API´s, Node.js e Express.
+Projeto desenvolvido por Sofia Medeiros da Fonseca para fins de estudo em APIs, Node.js e Express.
