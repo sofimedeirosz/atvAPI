@@ -12,6 +12,9 @@ const discos = [
     {id: 5, artista: "Red Hot Chili Peppers", titulo: "By the Way" },
     {id: 6, artista: "The Strokes", titulo: "The New Abnormal" },
     {id: 7, artista: "Dream Theater", titulo: "Metropolis Pt.2" },
+    {id: 8, artista: "The Beatles", titulo: "Abbey Road" },
+    {id: 9, artista: "Nirvana", titulo: "Nevermind" },
+    {id: 10, artista: "The Cure", titulo: "Disintegration" }
 ];
 
 //endpoint
